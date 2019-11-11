@@ -3,24 +3,22 @@ import java.util.Scanner;
 public class RemoteControlSimulator {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		Scanner kb = new Scanner(System.in);
-		
 		String input = "";
 		
-		do {
+		do { // turn on sequence, only accepts 'on' to move to remainder of controller
 			System.out.print("To begin, turn on the remote control: ");
 			input = kb.next();
 		} while (!input.equalsIgnoreCase("on"));
 		
 		turningOn();
-		pressButton();
 		
-		do {
+		do { // controller is on, user can input 0-9 or 'off' to exit
 			System.out.print("Select a button: ");
 			input = kb.next();
-			switch (input){
-				case "0":
+			switch (input.toUpperCase()){
+				case "0":  // all single digits fall through to pressButton() and continue the loop
 				case "1":
 				case "2":
 				case "3":
@@ -32,29 +30,17 @@ public class RemoteControlSimulator {
 				case "9":
 					pressButton();
 					break;
-				case "off":
-				case "ofF":
-				case "oFf":
-				case "Off":
-				case "oFF":
-				case "OFf":
-				case "OfF":
-				case "OFF":
+				case "OFF": // upper case - input manipulated toUpperCase
 					turningOff();
 					break;
 				default:
 					badCommand();
 					break;
 			}
-			
-			
-			
 		} while (!input.equalsIgnoreCase("off"));
 		
-		
-		
 		kb.close();
-	}
+	} // end main
 
 	public static void turningOn() {
 		System.out.println("TURNING ON...");
